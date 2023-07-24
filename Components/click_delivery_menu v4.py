@@ -1,4 +1,4 @@
-#Menu so that user can choose click and collect or delivery\
+#Menu so that user can choose click and collect or delivery
 
 # Bug - need it so that it only accepts 1 or 2
 
