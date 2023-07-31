@@ -12,7 +12,7 @@ while not valid:
         print (customer_details['name'])
         break
     else: 
-        print("Sorry this cannot be blank")
+        print("Sorry this cannot be blank")  
 
 
 #customer phone number not blank
