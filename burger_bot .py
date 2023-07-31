@@ -1,4 +1,4 @@
-# Laptop Shop Bot
+# burger Shop Bot
 # Bugs - Phone Number allows letters
 #      - Name allows numbers
 import random
@@ -46,9 +46,9 @@ def welcome():
     '''
     num = randint(0,9)
     name = (names[num])
-    print("*** Welcome to my Laptop Shop ***")
+    print("*** Welcome to my burger Shop ***")
     print("*** my name is ",name, "***")
-    print("*** I will be here to help you order the right and perfect laptop for you ***")
+    print("*** I will be here to help you order the right and perfect burger for you ***")
     
 # Menu for Pickup and Delivery
 def order_type():
