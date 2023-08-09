@@ -20,4 +20,3 @@ while True:
     except ValueError:
         print ("That was not a valid input")
         print ("Please enter 1 or 2 ")
-        print ("Please enter 1 or 2 ")
