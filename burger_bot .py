@@ -3,7 +3,6 @@
 #      - Name allows numbers
 import random
 from random import randint
-
 #List of random names
 names=["Mark", "Pheobe", "Sally", "Michael", "Denise","Ellen", "Eric", "Moana", "Lewis","Lara"]
 def welcome():
@@ -21,12 +20,9 @@ burger_names = ['The Classic Cheese Burger - The Classic juciy beef patty, lettu
                 'Breakfast Burger - Beef/pork patty, fried egg, with melted cheese, tomato and bacon','Blue Cheese Greeny Burger - With caramilzed onions and Dijon musturd', 
                'Mediterranean Falafel Burger - Falafal patty, pita/bun, lettuce cucumber, red onions and tahini sause','Surf n Turf Burger - Beef patty, grilled shrimp, garlic aioli, and tomatoes ',
                'Gourmet Burger - Premium beef patty, argula, onions, and trffel aioli',]
-
 #Lists of burger prices
 burger_prices = [7.50, 7.50, 7.50, 7.50, 8.50, 8.50, 8.50, 8.50, 13.50, 13.50,13.50, 13.50]
-
 customer_details = {}
-
 # validates inputs to check if they are blank
 def not_blank(question):
     valid = False
@@ -72,7 +68,6 @@ def order_type():
         except ValueError:
             print ("That was not a valid input")
             print ("Please enter 1 or 2 ")
-
 # Pickup information - Name and Phone
 def Click_and_Collect_info():
     question = ("Please enter your name ")
@@ -101,7 +96,6 @@ def delivery_info():
     customer_details['suburb'] = not_blank(question)
     print(customer_details['suburb'])
     print(customer_details)
-
 # Item List
 def list():
     number_burgers = 12
@@ -109,10 +103,10 @@ def list():
     for count in range (number_burgers):
         print("{} {} ${:.2f}"   .format(count+1,burger_names [count],burger_prices[count]))
 
-        
+
 # Choose total number of items
 def order_burgers():
-    
+
     while True:
         try:
             num_burgers = int(input("How many burgers do you want to order? "))
@@ -136,7 +130,7 @@ def order_burgers():
                 except ValueError:
                     print("That is not a valid number.")
                     print("Please enter a number between 1 and", len(burger_names))
-            
+
             burgers_ordered = burgers_ordered - 1
             burger_names.append(burger_names[burgers_ordered])
             burger_prices.append(burger_prices[burgers_ordered])
@@ -147,17 +141,9 @@ def order_burgers():
 
 
 # Item(s) ordered - from item list - print each ordered item with cost
-
-
 # Print order out - including if the order is pickup or delivery and names and prices of each item - total cost including any delivery charge
-
-
 # Ability to cancel or proceed with order
-
-
 # Option for new order or to exit
-
-
 # Main Function
 def main():
     '''

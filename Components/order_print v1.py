@@ -6,11 +6,10 @@ order_list = ['The Classic Cheese Burger - The Classic juciy beef patty, lettuce
 #List to store pizzas prices
 order_cost = [7.50, 7.50, 7.50, 7.50,]
 
-cust_details = {'Name':'Mark', 'Phone':'0214635678', 'House':'32', 'Street':'fars', 'Surburb':'Flat Bush'}
+cust_details = {'Name':'Mark', 'Phone':'0214635678', 'House':'23', 'Street':'Far', 'Surburb':'Howick'}
 
-#print("\n",cust_details['Name'], "\n",cust_details['Phone'], "\n",cust_details['House'], "\n",cust_details['Street'], "\n",cust_details['Surburb'])
-
-print("\n Customer Name: {} Customer Phone:\n{} Customer House:\n{} Customer Street:\n{} Customer Surburb:\n{}" .format(cust_details['Name'],cust_details['Phone'],cust_details['House'],cust_details['Street'],cust_details['Surburb']))
+#print("\n Customer Name: {} Customer Phone:\n{} Customer House:\n{} Customer Street:\n{} Customer Surburb:\n{}" .format(cust_details['Name'],cust_details['Phone'],cust_details['House'],cust_details['Street'],cust_details['Surburb']))
+print(f"Customer Name: {cust_details['Name']} \nCustomer Phone: {cust_details['Phone']} \nCustomer Address: {cust_details['House']} {cust_details['Street']} {cust_details['Surburb']}")
 
 count = 0
 for item in order_list:
