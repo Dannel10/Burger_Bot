@@ -1,7 +1,7 @@
 import sys
-#list to store ordered laptops
+#list to store ordered burgers
 order_list = []
-#list to store laptop prices
+#list to store burger prices
 order_cost = []
 # Customer details dictionary
 customer_details = {}

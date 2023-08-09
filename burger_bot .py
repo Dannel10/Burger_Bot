@@ -52,6 +52,20 @@ def not_blank(question):
             print("This cannot be blank")
 
 
+# validates inputs to check if they an integer
+def val_int(low,high,question):
+    while True: 
+        try:
+            num = int(input(question))
+            if num >= low and num <= high: 
+                return num
+            else:
+                    print(f"Please enter a number between {low} and {high} ")
+        except ValueError: 
+            print ("That is not a valid number")
+            print(f"Please enter a number between {low} and {high} ")
+
+
 
 
 # Welcome message with random name
@@ -71,41 +85,38 @@ def welcome():
 # Menu for Pickup and Delivery
 def order_type():
     del_pick = ""
-    print ("Is your order for Click and Collect or Delivery")
+    LOW = 1 
+    HIGH = 2
+    question = (f"Enter a number between {LOW} and {HIGH} ")
+    print ("Is your order for Click and Collect or delivery")
     print ("For Click and Collect please enter 1") 
     print ("For Delivery please enter 2")
-    while True:
-        try:
-            delivery = int(input("Please enter a number "))
-            if delivery >= 1 and delivery <= 2:
-                if delivery == 1:
-                    print ("Click and Collect")
-                    del_pick = "Click and Collect"
-                    Click_and_Collect_info()
-                    break
-                elif delivery == 2:
-                    print ("Delivery")
-                    del_pick = "Delivery"
-                    delivery_info()
-                    break
-            else:
-                print("Number must be 1 or 2")
-        except ValueError:
-            print ("That was not a valid input")
-            print ("Please enter 1 or 2 ")
+    delivery = val_int(LOW,HIGH,question)
+    if delivery == 1:
+        print()
+        print ("Click and Collect")
+        del_pick = "Click and Collect"
+        Click_and_Collect_info()
+    elif delivery == 2:
+        print()
+        print ("Delivery")
+        del_pick = "Delivery"
+        delivery_info()
     return del_pick
-
-
 
 # Pickup information - Name and Phone
 def Click_and_Collect_info():
     question = ("Please enter your name ")
     customer_details['name'] = not_blank(question )
-    #print(customer_details['name'])
+    print(customer_details['name'])
+
     question = ("Please enter your phone number ")
     customer_details['phone'] = not_blank(question)
-    #print(customer_details['phone'])
+    print(customer_details['phone'])
     print(customer_details)
+    print()
+
+
 # Delivery information - Name, Address and Phone
 def delivery_info():
     question = ("Please enter your name ")
@@ -124,7 +135,7 @@ def delivery_info():
     customer_details['suburb'] = not_blank(question)
     print(customer_details['suburb'])
     print(customer_details)
-
+    print()
 
 
 
@@ -133,43 +144,33 @@ def list():
     number_burgers = 12
     for count in range (number_burgers):
         print("{} {} ${:.2f}"   .format(count+1,burger_names[count],burger_prices[count]))
-# Choose total number of items - max 20
 
 # Item(s) ordered - from item list - print each ordered item with cost
 def order_burgers():
     # ask for total number of burgers for order
-   
+    print("Please note that due to covid, there has been delays in shipping and therefore you can only order a maximum of 20 burgers per order")
     num_burgers = 0
-    while True:
-        try:
-            num_burgers = int(input("How many burgers do you want to order? "))
-            if num_burgers >= 1:
-                break
-            else:
-                print("Your order must between 1 or more")
-        except ValueError:
-            print ("That is not a valid number")
-            print ("Please enter number ")
-    # Choose burgers from the list
+    LOW = 1 
+    HIGH = 20
+    MENU_LOW = 1
+    MENU_HIGH = 18
+    question = (f"Enter a number between {LOW} and {HIGH} ")
+    print ("How many burgers would you to purchase? ")
+    num_burgers = val_int(LOW,HIGH,question)
+
+#Choose burgers from the list
     for item in range(num_burgers):
         while num_burgers > 0:
-            while True:
-                try:
-                    burgers_ordered = int(input("Please choose your burgers by entering the number from the list "))
-                    if burgers_ordered >= 1 and burgers_ordered <= 12:
-                        break
-                    else: 
-                        print("Your number must be between 1 and 12")
-                except ValueError:
-                        print ("That is not a valid number")
-                        print ("Please enter number enter between 1 and 12 ") 
+            print ("Please choose your burgers" 
+                       "by entering the number from the list ")
+            question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")
+            burgers_ordered = val_int(MENU_LOW,MENU_HIGH,question)
             burgers_ordered = burgers_ordered -1
             order_list.append(burger_names[burgers_ordered])
             order_cost.append(burger_prices[burgers_ordered])    
-            print("{} ${:.2f}" .format(burger_names[burgers_ordered],burger_prices[burgers_ordered]))
+            print("{} ${:.2f}" .format(burger_names[burgers_ordered],
+                                            burger_prices[burgers_ordered]))
             num_burgers = num_burgers-1
-
-# Print order out - including if the order is pickup or delivery and names and prices of each item - total cost including any delivery charge
 
 # Print order out - including if the order is pickup or delivery and names and prices of each item - total cost including any delivery charge
 def print_order(del_pick):
@@ -181,7 +182,9 @@ def print_order(del_pick):
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
     elif del_pick == "Delivery":
         print("Your order is for Delivery")
-        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} "
+              f" \nCustomer Address: {customer_details['house']} {customer_details['street']}"
+              f" {customer_details['suburb']}")
     print()
     print("Order Details")
     count = 0
@@ -189,7 +192,6 @@ def print_order(del_pick):
         print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))
         count = count+1
     print()
-    print("Order Cost Details")
     if del_pick == "Delivery":
         if len(order_list) >= 5:
             print("Your order will be Delivered to you for free")
@@ -199,70 +201,58 @@ def print_order(del_pick):
     print("Total Order Cost")
     print(f"${total_cost:.2f}")
     print()
-    
 
 # Ability to cancel or proceed with order
-def confirm_order():
+
+def confirm_cancel():
+    LOW = 1 
+    HIGH = 2
+    question = (f"Enter a number between {LOW} and {HIGH} ")
     print ("Please Confirm Your Order")
     print ("To Confirm please enter 1") 
     print ("To Cancel please enter 2")
-    print()
-    while True:
-        try:
-            confirm = int(input("Please enter a number "))
-            if confirm >= 1 and confirm <= 2:
-                if confirm == 1:
-                    print ("Order Confirmed")
-                    print ("Your order will be sent to our Store")
-                    print ("It will be ready soon")
-                    print()
-                    new_exit()
-                    break
+    
+    confirm = val_int(LOW,HIGH,question)
+    if confirm == 1:
+        print ("Order Confirmed")
+        print ("Your order will be sent to our Store")
+        print ("It will be ready soon")
+        print()
+        new_exit()
 
-                elif confirm == 2:
-                    print ("Order Cancelled")
-                    print ("You can restart your order or exit the BOT")
-                    print()
-                    new_exit()
-                    break
-            else:
-                print("Number must be 1 or 2")
-        except ValueError:
-            print ("That was not a valid input")
-            print ("Please enter 1 or 2 ")
-
+    elif confirm == 2:
+        print ("Order Cancelled")
+        print ("You can restart your order or exit the BOT")
+        print()
+        new_exit()
+    
 
 # Option for new order or to exit
 def new_exit():
+    LOW = 1 
+    HIGH = 2
+    question = (f"Enter a number between {LOW} and {HIGH} ")
     print ("Do you want to start another Order or Exit?")
     print ("To start another order enter 1") 
     print ("To exit the bot enter 2")
-    while True:
-        try:
-            confirm = int(input("Please enter a number "))
-            if confirm >= 1 and confirm <= 2:
-                if confirm == 1:
-                    print ("New Order")
-                    print()
-                    order_list.clear()
-                    order_cost.clear()
-                    customer_details.clear()
-                    main()
-                    break
+    
+    confirm = val_int(LOW,HIGH,question)
+    if confirm == 1:
+        print ("New Order")
+        print()
+        order_list.clear()
+        order_cost.clear()
+        customer_details.clear()
+        main()
+
+    elif confirm == 2:
+        print ("Exit")
+        order_list.clear()
+        order_cost.clear()
+        customer_details.clear()
+        sys.exit
 
 
-                elif confirm == 2:
-                    print ("Exit")
-                    order_list.clear()
-                    order_cost.clear()
-                    customer_details.clear()
-                    sys.exit
-                    break
-            else:
-                print("Number must be 1 or 2")
-        except ValueError:
-            print ("That was not a valid input")
-            print ("Please enter 1 or 2 ")
 # Main Function
 def main():
     '''
@@ -276,6 +266,6 @@ def main():
     list()
     order_burgers()
     print_order(del_pick)
-    confirm_order()
+    confirm_cancel()
 
 main()
