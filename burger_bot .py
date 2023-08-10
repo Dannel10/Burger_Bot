@@ -148,12 +148,11 @@ def list():
 # Item(s) ordered - from item list - print each ordered item with cost
 def order_burgers():
     # ask for total number of burgers for order
-    print("Please note that due to covid, there has been delays in shipping and therefore you can only order a maximum of 20 burgers per order")
-    num_burgers = 0
+    print("Due to our store being just opened the maximum capacity of orders we can take is 100")
     LOW = 1 
-    HIGH = 20
+    HIGH = 100
     MENU_LOW = 1
-    MENU_HIGH = 18
+    MENU_HIGH = 12
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print ("How many burgers would you to purchase? ")
     num_burgers = val_int(LOW,HIGH,question)
@@ -179,6 +178,7 @@ def print_order(del_pick):
     print("Customer Details")
     if del_pick == "Click and Collect":
         print("Your order is for Click and Collect")
+        print("You will receive a text message when the item/s are ready for pick-up.")
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
     elif del_pick == "Delivery":
         print("Your order is for Delivery")
