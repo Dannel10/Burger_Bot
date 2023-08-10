@@ -6,9 +6,12 @@ import sys
 import random
 from random import randint
 
+#Constants
+LOW = 1 
+HIGH = 2
+
 
 #List of random names
-
 names=["Mark", "Pheobe", "Sally", "Michael", "Denise","Ellen", "Eric", "Moana", "Lewis","Lara"]
 def welcome():
     '''
@@ -52,6 +55,16 @@ def not_blank(question):
             print("This cannot be blank")
 
 
+# validates string inputs to check if they are alphabetical
+def check_string(question):
+    while True:
+        response = input(question)
+        x = response.isalpha()
+        if x == False:
+            print("Input must only contain letters")
+        else: 
+            return response.title()
+
 # validates inputs to check if they an integer
 def val_int(low,high,question):
     while True: 
@@ -85,8 +98,6 @@ def welcome():
 # Menu for Pickup and Delivery
 def order_type():
     del_pick = ""
-    LOW = 1 
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print ("Is your order for Click and Collect or delivery")
     print ("For Click and Collect please enter 1") 
@@ -107,7 +118,7 @@ def order_type():
 # Pickup information - Name and Phone
 def Click_and_Collect_info():
     question = ("Please enter your name ")
-    customer_details['name'] = not_blank(question )
+    customer_details['name'] = check_string(question)
     print(customer_details['name'])
 
     question = ("Please enter your phone number ")
@@ -120,7 +131,7 @@ def Click_and_Collect_info():
 # Delivery information - Name, Address and Phone
 def delivery_info():
     question = ("Please enter your name ")
-    customer_details['name'] = not_blank(question )
+    customer_details['name'] = check_string(question)
     print(customer_details['name'])
     question = ("Please enter your phone number ")
     customer_details['phone'] = not_blank(question)
@@ -129,10 +140,10 @@ def delivery_info():
     customer_details['house'] = not_blank(question)
     print(customer_details['house'])
     question = ("Please enter your street name ")
-    customer_details['street'] = not_blank(question)
+    customer_details['street'] = check_string(question)
     print(customer_details['street'])
     question = ("Please enter your suburb ")
-    customer_details['suburb'] = not_blank(question)
+    customer_details['suburb'] = check_string(question)
     print(customer_details['suburb'])
     print(customer_details)
     print()
@@ -149,21 +160,20 @@ def list():
 def order_burgers():
     # ask for total number of burgers for order
     print("Due to our store being just opened the maximum capacity of orders we can take is 100")
-    LOW = 1 
-    HIGH = 100
-    MENU_LOW = 1
-    MENU_HIGH = 12
-    question = (f"Enter a number between {LOW} and {HIGH} ")
+    NUM_LOW = 1 
+    NUM_HIGH = 100
+    LIST_LOW = 1
+    LIST_HIGH = 12
+    question = (f"Enter a number between {NUM_LOW} and {NUM_HIGH} ")
     print ("How many burgers would you to purchase? ")
-    num_burgers = val_int(LOW,HIGH,question)
+    num_burgers = val_int(NUM_LOW,NUM_HIGH,question)
 
 #Choose burgers from the list
     for item in range(num_burgers):
         while num_burgers > 0:
-            print ("Please choose your burgers" 
-                       "by entering the number from the list ")
-            question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")
-            burgers_ordered = val_int(MENU_LOW,MENU_HIGH,question)
+            print ("Please choose your burgers")
+            question = (f"Enter a number between {LIST_LOW} and {LIST_HIGH} ")
+            burgers_ordered = val_int(LIST_LOW,LIST_HIGH,question)
             burgers_ordered = burgers_ordered -1
             order_list.append(burger_names[burgers_ordered])
             order_cost.append(burger_prices[burgers_ordered])    
@@ -205,8 +215,6 @@ def print_order(del_pick):
 # Ability to cancel or proceed with order
 
 def confirm_cancel():
-    LOW = 1 
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print ("Please Confirm Your Order")
     print ("To Confirm please enter 1") 
@@ -229,8 +237,6 @@ def confirm_cancel():
 
 # Option for new order or to exit
 def new_exit():
-    LOW = 1 
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print ("Do you want to start another Order or Exit?")
     print ("To start another order enter 1") 
